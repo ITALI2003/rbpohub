@@ -1,0 +1,3 @@
+valid JSON: individual_work/aitova_stm32_channel/sbom_stm32.json
+valid JSON: individual_work/kutuzova_jetson_ota/sbom_jetson.json
+valid JSON: sbom_combined.json

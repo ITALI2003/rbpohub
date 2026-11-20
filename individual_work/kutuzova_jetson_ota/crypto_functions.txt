@@ -1,0 +1,15 @@
+src/ota_agent.c:10:    CURL *c = curl_easy_init();
+src/ota_agent.c:11:    curl_easy_setopt(c, CURLOPT_URL, url);
+src/ota_agent.c:12:    curl_easy_setopt(c, CURLOPT_SSL_VERIFYPEER, 1L);
+src/ota_agent.c:13:    curl_easy_setopt(c, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_3);
+src/ota_agent.c:14:    CURLcode rc = curl_easy_perform(c);
+src/ota_agent.c:15:    curl_easy_cleanup(c);
+src/ota_agent.c:23:    int ok = EVP_DigestVerifyInit(md, NULL, NULL, NULL, pub) == 1 &&
+src/ota_agent.c:24:             EVP_DigestVerify(md, sig, sig_len, img, len) == 1;   /* Ed25519 */
+src/task_parser.c:8:    cJSON *root = cJSON_Parse(json);
+src/main.c:12:    SSL_CTX *ctx = SSL_CTX_new(TLS_client_method());
+src/main.c:13:    SSL_CTX_set_min_proto_version(ctx, TLS1_3_VERSION);
+src/main.c:14:    SSL_CTX_set_verify(ctx, SSL_VERIFY_PEER, NULL);          /* mTLS к ЦСУД 10.20.30.10:443 */
+src/main.c:15:    SSL_CTX_use_certificate_file(ctx, "/etc/robot/ch1.crt", SSL_FILETYPE_PEM);
+src/main.c:16:    SSL_CTX_use_PrivateKey_file(ctx, "/etc/robot/ch1.key", SSL_FILETYPE_PEM);
+src/telemetry_buffer.c:9:    if (sqlite3_open(path, &db) != SQLITE_OK) return -1;

@@ -1,0 +1,53 @@
+stages:
+  - build
+  - sca
+  - security_gate
+
+variables:
+  TRIVY_IMAGE: aquasec/trivy:latest
+
+sbom:
+  stage: build
+  image: alpine:3.20
+  before_script: [apk add --no-cache bash jq]
+  script:
+    - ./scripts/dependency_analyzer.sh individual_work
+    - ./scripts/generate_embedded_sbom.sh individual_work/aitova_stm32_channel/third_party.txt robot-ch2-ch3-stm32 "Robot TMR backup channel (STM32H7)" 1.0.0 individual_work/aitova_stm32_channel/sbom_stm32.json
+    - ./scripts/generate_embedded_sbom.sh individual_work/kutuzova_jetson_ota/third_party.txt robot-ch1-jetson "Robot TMR main channel + OTA agent (Jetson)" 1.0.0 individual_work/kutuzova_jetson_ota/sbom_jetson.json
+    - ./scripts/merge_sbom.sh sbom_combined.json
+    - ./scripts/check_licenses.sh sbom_combined.json
+  artifacts:
+    paths: [dependencies_analysis.txt, individual_work/*/sbom_*.json, sbom_combined.json]
+    expire_in: 1 week
+
+sca_analysis:
+  stage: sca
+  image: { name: $TRIVY_IMAGE, entrypoint: [""] }
+  script:
+    - trivy fs --scanners vuln individual_work/kutuzova_jetson_ota | tee sca-jetson-report.txt
+    - trivy fs --scanners vuln individual_work/aitova_stm32_channel | tee sca-stm32-report.txt
+    - trivy sbom individual_work/kutuzova_jetson_ota/sbom_jetson.json | tee sca-sbom-report.txt
+    - trivy fs --scanners vuln --severity CRITICAL individual_work > sca-critical-report.txt
+  artifacts:
+    paths: [sca-*-report.txt]
+    expire_in: 1 week
+
+security_gate:
+  stage: security_gate
+  image: alpine:3.20
+  script:
+    - |
+      echo "=== Security Gate Check ==="
+      critical_count=$(grep -c "CRITICAL" sca-critical-report.txt || true)
+      if [ "$critical_count" -gt 0 ]; then
+        echo "❌ КРИТИЧЕСКИЕ уязвимости обнаружены: $critical_count"
+        exit 1
+      fi
+      echo "✅ Security Gate пройден"
+
+dependency_track_upload:
+  stage: security_gate
+  image: alpine:3.20
+  when: manual
+  before_script: [apk add --no-cache bash curl jq]
+  script: [./scripts/upload_to_dtrack.sh]

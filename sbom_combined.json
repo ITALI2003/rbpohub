@@ -1,0 +1,215 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:4ae7b7c3-1ed4-4980-b568-3ece37b443bc",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-27T19:51:12Z",
+    "component": {
+      "type": "application",
+      "bom-ref": "robot-courier-firmware-suite",
+      "name": "Robot Courier Firmware Suite",
+      "version": "1.0.0",
+      "description": "Прошивки каналов TMR робота-курьера"
+    }
+  },
+  "components": [
+    {
+      "type": "firmware",
+      "bom-ref": "robot-ch2-ch3-stm32",
+      "name": "Robot TMR backup channel (STM32H7)",
+      "version": "1.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/freertos/freertos-kernel@V10.4.3",
+      "name": "FreeRTOS-Kernel",
+      "version": "10.4.3",
+      "purl": "pkg:github/freertos/freertos-kernel@V10.4.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:o:amazon:freertos:10.4.3:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/lwip@2.1.2",
+      "name": "lwIP",
+      "version": "2.1.2",
+      "purl": "pkg:generic/lwip@2.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:lwip_project:lwip:2.1.2:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/mbedtls@2.16.10",
+      "name": "Mbed TLS",
+      "version": "2.16.10",
+      "purl": "pkg:conan/mbedtls@2.16.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:arm:mbed_tls:2.16.10:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/stmicroelectronics/stm32cubeh7@v1.10.0",
+      "name": "STM32CubeH7 HAL",
+      "version": "1.10.0",
+      "purl": "pkg:github/stmicroelectronics/stm32cubeh7@v1.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/arm-software/cmsis_5@5.9.0",
+      "name": "CMSIS",
+      "version": "5.9.0",
+      "purl": "pkg:github/arm-software/cmsis_5@5.9.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/newlib@4.1.0",
+      "name": "newlib (arm-none-eabi-gcc 10.3-2021.10)",
+      "version": "4.1.0",
+      "purl": "pkg:generic/newlib@4.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "type": "firmware",
+      "bom-ref": "robot-ch1-jetson",
+      "name": "Robot TMR main channel + OTA agent (Jetson)",
+      "version": "1.0.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/openssl@1.1.1k",
+      "name": "OpenSSL",
+      "version": "1.1.1k",
+      "purl": "pkg:conan/openssl@1.1.1k",
+      "licenses": [
+        {
+          "license": {
+            "id": "OpenSSL"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:openssl:openssl:1.1.1k:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/libcurl@7.79.1",
+      "name": "libcurl",
+      "version": "7.79.1",
+      "purl": "pkg:conan/libcurl@7.79.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "curl"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:haxx:libcurl:7.79.1:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/cjson@1.7.14",
+      "name": "cJSON",
+      "version": "1.7.14",
+      "purl": "pkg:conan/cjson@1.7.14",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:cjson_project:cjson:1.7.14:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/sqlite3@3.35.5",
+      "name": "SQLite",
+      "version": "3.35.5",
+      "purl": "pkg:conan/sqlite3@3.35.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "blessing"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:sqlite:sqlite:3.35.5:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/zlib@1.2.11",
+      "name": "zlib",
+      "version": "1.2.11",
+      "purl": "pkg:conan/zlib@1.2.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "Zlib"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:zlib:zlib:1.2.11:*:*:*:*:*:*:*"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "robot-ch2-ch3-stm32",
+      "dependsOn": [
+        "pkg:github/freertos/freertos-kernel@V10.4.3",
+        "pkg:generic/lwip@2.1.2",
+        "pkg:conan/mbedtls@2.16.10",
+        "pkg:github/stmicroelectronics/stm32cubeh7@v1.10.0",
+        "pkg:github/arm-software/cmsis_5@5.9.0",
+        "pkg:generic/newlib@4.1.0"
+      ]
+    },
+    {
+      "ref": "robot-ch1-jetson",
+      "dependsOn": [
+        "pkg:conan/openssl@1.1.1k",
+        "pkg:conan/libcurl@7.79.1",
+        "pkg:conan/cjson@1.7.14",
+        "pkg:conan/sqlite3@3.35.5",
+        "pkg:conan/zlib@1.2.11"
+      ]
+    }
+  ]
+}

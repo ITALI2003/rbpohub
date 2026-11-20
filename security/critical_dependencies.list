@@ -1,0 +1,9 @@
+openssl
+mbedtls
+libcurl
+cjson
+sqlite3
+zlib
+lwip
+freertos
+arm-none-eabi-gcc

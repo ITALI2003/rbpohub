@@ -1,0 +1,104 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:d383a061-864f-4b44-87a3-2666d10b49f6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-27T19:51:12Z",
+    "component": {
+      "type": "firmware",
+      "bom-ref": "robot-ch2-ch3-stm32",
+      "name": "Robot TMR backup channel (STM32H7)",
+      "version": "1.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/freertos/freertos-kernel@V10.4.3",
+      "name": "FreeRTOS-Kernel",
+      "version": "10.4.3",
+      "purl": "pkg:github/freertos/freertos-kernel@V10.4.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:o:amazon:freertos:10.4.3:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/lwip@2.1.2",
+      "name": "lwIP",
+      "version": "2.1.2",
+      "purl": "pkg:generic/lwip@2.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:lwip_project:lwip:2.1.2:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:conan/mbedtls@2.16.10",
+      "name": "Mbed TLS",
+      "version": "2.16.10",
+      "purl": "pkg:conan/mbedtls@2.16.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:arm:mbed_tls:2.16.10:*:*:*:*:*:*:*"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/stmicroelectronics/stm32cubeh7@v1.10.0",
+      "name": "STM32CubeH7 HAL",
+      "version": "1.10.0",
+      "purl": "pkg:github/stmicroelectronics/stm32cubeh7@v1.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:github/arm-software/cmsis_5@5.9.0",
+      "name": "CMSIS",
+      "version": "5.9.0",
+      "purl": "pkg:github/arm-software/cmsis_5@5.9.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:generic/newlib@4.1.0",
+      "name": "newlib (arm-none-eabi-gcc 10.3-2021.10)",
+      "version": "4.1.0",
+      "purl": "pkg:generic/newlib@4.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ]
+    }
+  ]
+}

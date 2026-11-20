@@ -1,0 +1,13 @@
+=== Проверка лицензий (sbom_combined.json) ===
+FreeRTOS-Kernel                          10.4.3     MIT            OK
+lwIP                                     2.1.2      BSD-3-Clause   OK
+Mbed TLS                                 2.16.10    Apache-2.0     OK
+STM32CubeH7 HAL                          1.10.0     BSD-3-Clause   OK
+CMSIS                                    5.9.0      Apache-2.0     OK
+newlib (arm-none-eabi-gcc 10.3-2021.10)  4.1.0      BSD-3-Clause   OK
+OpenSSL                                  1.1.1k     OpenSSL        OK (исключение, согласовано)
+libcurl                                  7.79.1     curl           OK (исключение, согласовано)
+cJSON                                    1.7.14     MIT            OK
+SQLite                                   3.35.5     blessing       OK (исключение, согласовано)
+zlib                                     1.2.11     Zlib           OK (исключение, согласовано)
+✅ Лицензионная проверка пройдена

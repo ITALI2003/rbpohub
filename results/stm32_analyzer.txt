@@ -1,0 +1,22 @@
+=== Анализ зависимостей прошивки канала 2/3 (STM32H7) ===
+#include "FreeRTOS.h"
+#include "lwip/netif.h"
+#include "lwip/sockets.h"
+#include "lwip/tcpip.h"
+#include "mbedtls/ctr_drbg.h"
+#include "mbedtls/entropy.h"
+#include "mbedtls/net_sockets.h"
+#include "mbedtls/ssl.h"
+#include "mbedtls/timing.h"
+#include "mbedtls/x509_crt.h"
+#include "queue.h"
+#include "stm32h7xx_hal.h"
+#include "task.h"
+
+Вызовы Mbed TLS: 12
+=== Критичные зависимости канала 2/3 ===
+1. Mbed TLS — DTLS-канал голосования к арбитру (UDP/8888), проверка сертификатов
+2. lwIP — сетевой стек: разбирает все входящие пакеты бортовой сети
+3. FreeRTOS — ядро РВ: очереди и задачи (сбой = остановка канала)
+4. STM32CubeH7 HAL, CMSIS, newlib — драйверы и runtime компилятора
+Пакетный менеджер: только Mbed TLS (conan.lock); остальное — исходники в репозитории
