@@ -67,7 +67,7 @@ jobs:
     needs: build-sbom
     runs-on: ubuntu-latest
     container:
-      image: ${{ env.TRIVY_IMAGE }}
+      image: aquasec/trivy:latest
       options: --entrypoint ""
     steps:
       - name: Checkout code
