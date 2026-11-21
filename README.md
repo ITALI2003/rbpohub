@@ -25,3 +25,4 @@ export DTRACK_API_KEY=...; ./scripts/upload_to_dtrack.sh
 - `security/` — политика `team_vulnerability_policy.yaml`, список критичных зависимостей
 - `.gitlab-ci.yml` — стадии build → sca → security_gate (+ ручная загрузка в DT)
 - `results/` — выводы скриптов, `report/` — отчёт
+добавлено
