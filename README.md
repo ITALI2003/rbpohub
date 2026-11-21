@@ -1,27 +1,29 @@
-# ЛР3. Композиционный анализ (SCA) прошивок робота-курьера
+# ЛР5. Формальная верификация модуля голосования арбитра TMR (робот-курьер, вариант 1)
 
-Дисциплина: «Разработка безопасного программного обеспечения». Гр. М3О-207СВ-25.
-Аитова А. В. (DevSecOps, прошивка каналов 2/3 на STM32H7), Кутузова О. С. (аналитик SCA, канал 1 и OTA на Jetson).
-Преподаватель: Горбунов М. М.
-
-## Запуск
-
-```bash
-docker compose up -d                      # Dependency-Track: http://localhost:8080 (admin/admin)
-./scripts/dependency_analyzer.sh individual_work
-./scripts/generate_embedded_sbom.sh individual_work/aitova_stm32_channel/third_party.txt robot-ch2-ch3-stm32 "Robot TMR backup channel (STM32H7)" 1.0.0 individual_work/aitova_stm32_channel/sbom_stm32.json
-./scripts/generate_embedded_sbom.sh individual_work/kutuzova_jetson_ota/third_party.txt robot-ch1-jetson "Robot TMR main channel + OTA agent (Jetson)" 1.0.0 individual_work/kutuzova_jetson_ota/sbom_jetson.json
-./scripts/merge_sbom.sh
-./scripts/check_licenses.sh sbom_combined.json
-./scripts/sca_scan_embedded.sh            # trivy в docker
-export DTRACK_API_KEY=...; ./scripts/upload_to_dtrack.sh
-./scripts/dependency_monitor.sh
-```
+Дисциплина: «Разработка безопасного программного обеспечения». Выполнила: Аитова А. В., гр. М3О-207СВ-25. Преподаватель: Горбунов М. М.
 
 ## Состав
-- `individual_work/aitova_stm32_channel/` — исходники, third_party.txt, conan.lock, SBOM каналов 2/3
-- `individual_work/kutuzova_jetson_ota/` — исходники, conan.lock, SBOM канала 1 и OTA
-- `scripts/` — анализ, генерация и слияние SBOM, лицензии, Trivy, Dependency-Track, мониторинг
-- `security/` — политика `team_vulnerability_policy.yaml`, список критичных зависимостей
-- `.gitlab-ci.yml` — стадии build → sca → security_gate (+ ручная загрузка в DT)
-- `results/` — выводы скриптов, `report/` — отчёт
+- `src/legacy/vote_parser_legacy.c` — исходный модуль с 5 дефектами (CWE-190, 787, 369, 129, 476)
+- `src/fixed/vote_parser.c` — исправленный модуль с ACSL-контрактами и инвариантами циклов
+- `harness/harness.c` — обвязка для ESBMC (недетерминированный пакет 0..64 байт), `harness/harness_eva.c` — для Frama-C EVA
+- `tests/repro.c` — воспроизведение контрпримеров ESBMC с ASan/UBSan
+- `scripts/run_esbmc.sh`, `scripts/run_frama_c.sh`, `.gitlab-ci.yml`
+- `results/` — логи прогонов
+
+## Запуск (WSL2, Ubuntu 24.04)
+Frama-C есть в репозитории Ubuntu 24.04; в Ubuntu 22.04 пакет удалён.
+```bash
+sudo apt install -y frama-c why3 alt-ergo z3 gcc unzip wget tree
+why3 config detect
+wget https://github.com/esbmc/esbmc/releases/download/v7.11/esbmc-linux.zip && unzip esbmc-linux.zip -d ~/esbmc
+export ESBMC=$(find ~/esbmc -name esbmc -type f | head -1); chmod +x $ESBMC
+./scripts/run_esbmc.sh all     # legacy: VERIFICATION FAILED (7), fixed: VERIFICATION SUCCESSFUL
+./scripts/run_frama_c.sh all   # EVA-тревоги на legacy, WP-доказательство контрактов fixed
+gcc -g -fsanitize=address,undefined -Isrc tests/repro.c src/legacy/vote_parser_legacy.c -o repro && ./repro 1
+```
+Frama-C через Docker (если apt не подходит):
+```bash
+export FRAMAC="docker run --rm -v $PWD:/work -w /work framac/frama-c:32.1 frama-c"
+./scripts/run_frama_c.sh all
+```
+Если WP пишет, что решатель alt-ergo не найден: `why3 config list-provers` и `PROVER="<имя из списка>" ./scripts/run_frama_c.sh wp` (или `PROVER=z3`).

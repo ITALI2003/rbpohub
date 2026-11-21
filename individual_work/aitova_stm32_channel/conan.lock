@@ -1,8 +1,0 @@
-{
-    "version": "0.5",
-    "requires": [
-        "mbedtls/2.16.10"
-    ],
-    "build_requires": [],
-    "python_requires": []
-}

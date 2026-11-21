@@ -1,7 +1,0 @@
-# Компоненты прошивки канала 1 / OTA-агента (Jetson Xavier, Linux). Подключены через conan (conan.lock).
-# name;version;license;purl;cpe
-OpenSSL;1.1.1k;OpenSSL;pkg:conan/openssl@1.1.1k;cpe:2.3:a:openssl:openssl:1.1.1k:*:*:*:*:*:*:*
-libcurl;7.79.1;curl;pkg:conan/libcurl@7.79.1;cpe:2.3:a:haxx:libcurl:7.79.1:*:*:*:*:*:*:*
-cJSON;1.7.14;MIT;pkg:conan/cjson@1.7.14;cpe:2.3:a:cjson_project:cjson:1.7.14:*:*:*:*:*:*:*
-SQLite;3.35.5;blessing;pkg:conan/sqlite3@3.35.5;cpe:2.3:a:sqlite:sqlite:3.35.5:*:*:*:*:*:*:*
-zlib;1.2.11;Zlib;pkg:conan/zlib@1.2.11;cpe:2.3:a:zlib:zlib:1.2.11:*:*:*:*:*:*:*

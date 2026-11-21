@@ -1,3 +1,0 @@
-SBOM: individual_work/aitova_stm32_channel/sbom_stm32.json (6 компонентов)
-SBOM: individual_work/kutuzova_jetson_ota/sbom_jetson.json (5 компонентов)
-Мастер-SBOM: sbom_combined.json; прошивок: 2; библиотек: 11
